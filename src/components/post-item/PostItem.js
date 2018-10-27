@@ -4,7 +4,7 @@ import { PostImage } from "../../components/post-image/PostImage";
 import { PostTitle } from "../../components/post-title/PostTitle";
 import { PostTags } from "../../components/post-tags/PostTags";
 import { Col } from "antd";
-// import { Col } from "antd/lib/col";
+import { Card } from "antd";
 
 export const PostItem = ({ image, description, title, author, tags, url }) => {
   return (
@@ -15,12 +15,12 @@ export const PostItem = ({ image, description, title, author, tags, url }) => {
       lg={{ span: 6 }}
       xl={{ span: 6 }}
     >
-      <div>
+      <Card>
         <PostImage image={image} />
         <PostTitle title={title} author={author} url={url} />
         <PostDescription description={description} />
         <PostTags tags={tags} url={url} />
-      </div>
+      </Card>
     </Col>
   );
 };
