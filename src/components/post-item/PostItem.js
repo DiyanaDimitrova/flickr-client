@@ -5,6 +5,7 @@ import { PostTitle } from "../../components/post-title/PostTitle";
 import { PostTags } from "../../components/post-tags/PostTags";
 import { Col } from "antd";
 import { Card } from "antd";
+import "./PostItem.css";
 
 export const PostItem = ({ image, description, title, author, tags, url }) => {
   return (
