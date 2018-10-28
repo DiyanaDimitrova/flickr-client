@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import PostPage from "../containers/post-page/PostPage";
-import App from "../containers/app/App";
+import PostPage from "../containers/post-page/PostPage";
 
 export const AppRouter = () => (
   <BrowserRouter>
     <Switch>
-      <Route path={"/"} component={App} />
+      <Route path={"/"} component={PostPage} />
     </Switch>
   </BrowserRouter>
 );

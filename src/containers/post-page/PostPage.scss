@@ -1,0 +1,30 @@
+@import "~antd/dist/antd.css";
+$blueColor: #2196f3;
+$lightBlueColor: #e4f6f8;
+
+.post-header {
+  background-color: $blueColor;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  color: white;
+}
+
+.post-layout {
+  background-color: $lightBlueColor;
+}
+
+.post-content {
+  background-color: $lightBlueColor;
+  margin: 20px 40px;
+}
+
+.post-search {
+  padding: 0 5px;
+}
+.post-footer {
+  background-color: $blueColor;
+  font-weight: 500;
+  font-size: 15px;
+  color: white;
+}

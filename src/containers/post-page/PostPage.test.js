@@ -1,5 +1,6 @@
 import React from "react";
-import App from "./App";
+
+import PostPage from "./PostPage";
 import { shallow } from "enzyme";
 import configureStore from "redux-mock-store";
 
@@ -12,7 +13,7 @@ let wrapper;
 let store;
 beforeEach(() => {
   store = mockStore(initialState);
-  wrapper = shallow(<App store={store} />);
+  wrapper = shallow(<PostPage store={store} />);
 });
 
 it("renders without crashing", () => {});

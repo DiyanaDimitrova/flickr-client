@@ -1,45 +1,141 @@
 import React, { Component } from "react";
-import { Row } from "antd";
-import { PostItem } from "../../components/post-item/PostItem";
-// import InfiniteScroll from "react-infinite-scroller";
+import { Layout, Input } from "antd";
+import { connect } from "react-redux";
+import { getPostsAction, getTagPostsAction } from "../../actions/postAction";
+import { PostGrid } from "../../components/post-grid/PostGrid";
 import "./PostPage.scss";
-import VisibilitySensor from "react-visibility-sensor";
 
-/* <InfiniteScroll
-            loadMore={this.props.loadMore}
-            hasMore={this.props.hasMore}
-            loader={<div key={"test"}>Loading...</div>}
-            useWindow={false}
-          > */
-/* </InfiniteScroll> */
+const { Header, Footer, Content } = Layout;
+const Search = Input.Search;
+const ITEMS_PER_PAGE = 10;
 
 class PostPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hasMore: true,
+      posts: props.posts || [],
+      items: 0,
+      isVisible: true,
+      page: 0,
+      tags: null
+    };
+    this.bindMethods();
+  }
+
+  /**
+   * bindMethods
+   */
+  bindMethods() {
+    this.changeHandler = this.changeHandler.bind(this);
+    this.loadMoreHandler = this.loadMoreHandler.bind(this);
+  }
+
+  changeHandler(value) {
+    console.log("value", value);
+    if (value) {
+      this.setState(
+        {
+          tags: value
+        },
+        () => {
+          this.props.getTagPostsAction({
+            tags: value,
+            page: 1,
+            limit: ITEMS_PER_PAGE
+          });
+        }
+      );
+    } else {
+      this.setState(
+        {
+          tags: null
+        },
+        () => {
+          this.props.getPostsAction({
+            page: 1,
+            limit: ITEMS_PER_PAGE
+          });
+        }
+      );
+    }
+  }
+
+  loadMoreHandler() {
+    if (this.state.page < this.props.pages) {
+      console.log("this.state.tags", this.state.tags);
+
+      if (this.state.tags !== null) {
+        this.setState(
+          {
+            items: this.state.items + ITEMS_PER_PAGE,
+            page: this.state.page + 1,
+            posts: this.state.posts
+          },
+          () => {
+            this.props.getTagPostsAction({
+              tags: this.state.tags,
+              page: this.state.page,
+              limit: ITEMS_PER_PAGE
+            });
+          }
+        );
+      } else {
+        this.setState(
+          {
+            items: this.state.items + ITEMS_PER_PAGE,
+            page: this.state.page + 1,
+            posts: this.state.posts
+          },
+          () => {
+            this.props.getPostsAction({
+              page: this.state.page,
+              limit: ITEMS_PER_PAGE
+            });
+          }
+        );
+      }
+    }
+  }
   render() {
-    const { posts } = this.props;
+    console.log("this.props", this.props);
     return (
-      <div>
-        <Row type="flex" justify="space-between">
-          <VisibilitySensor
-            onChange={this.props.loadMore}
-            offset={{
-              bottom: -10000,
-              top: 0,
-              left: 0,
-              right: 0
-            }}
-            scrollCheck={true}
-            scrollDelay={0}
-            active={true}
-          >
-            <div>
-              {posts &&
-                posts.map((item, index) => <PostItem key={index} {...item} />)}
-            </div>
-          </VisibilitySensor>
-        </Row>
-      </div>
+      <Layout>
+        <Header className="post-header">Flickr Photo Stream</Header>
+        <Layout className="post-layout">
+          <Content className="post-content">
+            <Search
+              className="post-search"
+              placeholder="Enter Tag"
+              size="large"
+              onSearch={this.changeHandler}
+            />
+            <PostGrid
+              posts={this.props.posts}
+              pages={this.props.pages}
+              loadMore={this.loadMoreHandler}
+            />
+          </Content>
+        </Layout>
+        <Footer className="post-footer">Author: Diyana Dimitrova</Footer>
+      </Layout>
     );
   }
 }
 
-export default PostPage;
+const mapStateToProps = state => ({
+  posts: state.posts.items,
+  pages: state.posts.pages || 10,
+  postsLoading: state.posts.postsLoading
+});
+
+const mapDispatchToProps = dispatch => ({
+  getPostsAction: payload => dispatch(getPostsAction(payload)),
+  getTagPostsAction: payload => dispatch(getTagPostsAction(payload))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostPage);

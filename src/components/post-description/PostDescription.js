@@ -4,9 +4,9 @@ import "./PostDescription.scss";
 export const PostDescription = ({ description }) => {
   return (
     <div>
-      <div>
-        <h3>{"Description"}</h3>
-        <span>{description}</span>
+      <div className="post-description">
+        <div className="post-description-label">{"Description"}</div>
+        <div className="post-description-text">{description}</div>
       </div>
     </div>
   );

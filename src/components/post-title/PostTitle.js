@@ -1,11 +1,12 @@
 import React from "react";
+import "./PostTitle.scss";
 
-export const PostTitle = ({ title, author, url }) => {
+export const PostTitle = ({ title, titleUrl, author, authorUrl }) => {
   return (
-    <div>
-      <a href={url}>{title}</a>
+    <div className="post-title">
+      <a href={titleUrl}>{title}</a>
       <span>{" by "}</span>
-      <a href={url}>{author}</a>
+      <a href={authorUrl}>{author}</a>
     </div>
   );
 };

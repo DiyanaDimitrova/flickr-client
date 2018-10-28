@@ -1,3 +1,16 @@
-/* div > div {
-  display: flex;
-} */
+.post-description {
+  width: 100%;
+  float: left;
+  margin: 10px 0;
+}
+.post-description-label {
+  line-height: 22px;
+  float: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+.post-description-text {
+  font-size: 15px;
+}
