@@ -1,9 +1,13 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
+import "./PostImage.css";
 
 export const PostImage = ({ image }) => {
   return (
     <div>
-      <img src={image} alt="" height="100" width="100" />
+      <LazyLoad height={200} offset={100}>
+        <img src={image} alt="" height="100" width="100" />
+      </LazyLoad>
     </div>
   );
 };

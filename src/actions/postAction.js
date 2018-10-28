@@ -1,30 +1,49 @@
-import { FETCH_POSTS } from "../types";
+import {
+  FETCH_POSTS_SUCCESS,
+  FETCH_POSTS_ERROR,
+  FETCH_POSTS_LOADING
+} from "../types";
 import axios from "axios";
-// const key = "29338b632dd810eae994390263fa0249";
-// const secret = "eeac56515e6ed14e";
 const apiUrl = `http://localhost:3001/posts`;
 
-console.log("FETCH_POSTS", FETCH_POSTS);
-
 export const getPostsAction = payload => {
+  console.log("payload", payload);
   return dispatch => {
+    dispatch(fetchPostsSuccess({}));
     return axios
       .get(
-        payload && payload.tags ? `${apiUrl}?tag=${payload.tags}` : `${apiUrl}`
+        payload && payload.tags
+          ? `${apiUrl}?tags=${payload.tags}&page=${payload.page}&limit=${
+              payload.limit
+            }`
+          : `${apiUrl}?page=${payload.page}&limit=${payload.limit}`
       )
       .then(response => {
-        console.log("response", response.data.posts);
-        dispatch(getPostSuccess(response.data.posts));
+        console.log("response", response.data);
+        dispatch(fetchPostsSuccess(response.data));
       })
       .catch(error => {
-        throw error;
+        dispatch(fetchPostsError(error));
       });
   };
 };
 
-export const getPostSuccess = posts => {
+export const fetchPostsSuccess = data => {
   return {
-    type: FETCH_POSTS,
-    posts
+    type: FETCH_POSTS_SUCCESS,
+    data
+  };
+};
+
+export const fetchPostsError = data => {
+  return {
+    type: FETCH_POSTS_ERROR,
+    data
+  };
+};
+export const fetchPostsLoading = data => {
+  return {
+    type: FETCH_POSTS_LOADING,
+    data
   };
 };
