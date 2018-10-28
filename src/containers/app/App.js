@@ -86,7 +86,7 @@ class App extends Component {
         <Header>Flickr Photo Stream</Header>
         <Layout>
           <Content>
-            <Search onSearch={this.changeHandler} />
+            <Search placeholder="enter tag" onSearch={this.changeHandler} />
             <PostPage
               posts={this.props.posts}
               loadMore={this.loadMoreHandler}

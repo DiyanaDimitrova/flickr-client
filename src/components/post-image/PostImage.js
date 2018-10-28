@@ -6,7 +6,9 @@ export const PostImage = ({ image }) => {
   return (
     <div>
       <LazyLoad height={200} offset={100}>
-        <img src={image} alt="" height="100" width="100" />
+        <a href={image}>
+          <img src={image} alt="" height="100" width="100" />
+        </a>
       </LazyLoad>
     </div>
   );
