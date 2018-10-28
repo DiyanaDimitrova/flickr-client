@@ -8,12 +8,19 @@ export default function postReducer(state = [], action) {
   switch (action.type) {
     case FETCH_POSTS_SUCCESS:
       const { posts, page, pages, limit, total } = action.data;
-      return { posts, page, pages, limit, total, postsLoading: false };
+      const mergedPosts = [...state.posts, ...posts];
+      return {
+        posts: mergedPosts,
+        page,
+        pages,
+        limit,
+        total,
+        postsLoading: false
+      };
     case FETCH_POSTS_ERROR:
-      console.log("action", action);
-      return { ...action, postsLoading: false };
+      return { posts: [], error: true, postsLoading: false, ...state };
     case FETCH_POSTS_LOADING:
-      return { postsLoading: true };
+      return { error: false, postsLoading: true, ...state };
     default:
       return state;
   }

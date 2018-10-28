@@ -7,9 +7,8 @@ import axios from "axios";
 const apiUrl = `http://localhost:3001/posts`;
 
 export const getPostsAction = payload => {
-  console.log("payload", payload);
   return dispatch => {
-    dispatch(fetchPostsSuccess({}));
+    dispatch(fetchPostsLoading());
     return axios
       .get(
         payload && payload.tags
@@ -19,7 +18,6 @@ export const getPostsAction = payload => {
           : `${apiUrl}?page=${payload.page}&limit=${payload.limit}`
       )
       .then(response => {
-        console.log("response", response.data);
         dispatch(fetchPostsSuccess(response.data));
       })
       .catch(error => {

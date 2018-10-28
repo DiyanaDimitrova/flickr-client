@@ -1,6 +1,6 @@
 import React from "react";
 import LazyLoad from "react-lazyload";
-import "./PostImage.css";
+import "./PostImage.scss";
 
 export const PostImage = ({ image }) => {
   return (

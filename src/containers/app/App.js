@@ -3,7 +3,7 @@ import { Layout, Input } from "antd";
 import { connect } from "react-redux";
 import PostPage from "../post-page/PostPage";
 import { getPostsAction } from "../../actions/postAction";
-import "./App.css";
+import "./App.scss";
 
 const { Header, Footer, Content } = Layout;
 const Search = Input.Search;
@@ -15,11 +15,12 @@ class App extends Component {
 
     this.state = {
       hasMore: true,
-      posts: [],
-      items: ITEMS_PER_PAGE,
-      loading: false,
+      posts: props.posts || [],
+      items: 0,
+      loading: true,
       page: 1
     };
+    this.nextPaginatorWasAttached = false;
     this.bindMethods();
   }
 
@@ -31,19 +32,12 @@ class App extends Component {
     this.loadMoreHandler = this.loadMoreHandler.bind(this);
   }
 
-  // componentDidMount() {
-  //   // Detect when scrolled to bottom.
-  //   console.log("componentDidMount", this.refs);
-
-  //   this.refs.myscroll.addEventListener("scroll", () => {
-  //     if (
-  //       this.refs.myscroll.scrollTop + this.refs.myscroll.clientHeight >=
-  //       this.refs.myscroll.scrollHeight
-  //     ) {
-  //       this.loadMore();
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    this.props.getPostsAction({
+      page: this.state.page,
+      limit: ITEMS_PER_PAGE
+    });
+  }
 
   // loadMore() {
   //   this.setState({ loading: true });
@@ -63,39 +57,40 @@ class App extends Component {
     this.setState({
       tags: value
     });
-    // this.props.getPostsAction({ tags: value, page: 1, limit: ITEMS_PER_PAGE });
+    this.props.getPostsAction({ tags: value, page: 1, limit: ITEMS_PER_PAGE });
     console.log(value);
   }
 
-  loadMoreHandler(data) {
-    if (data >= this.props.pages) {
-      this.setState({
-        hasMore: false
-      });
-    } else {
-      this.props.getPostsAction({ page: data, limit: ITEMS_PER_PAGE });
+  loadMoreHandler(isVisible) {
+    console.log("isVisible", isVisible);
+    if (!isVisible) {
+      this.setState(
+        {
+          items: this.state.items + ITEMS_PER_PAGE,
+          loading: false,
+          page: this.state.page + 1,
+          posts: this.state.posts || []
+        },
+        () =>
+          this.props.getPostsAction({
+            page: this.state.page,
+            limit: ITEMS_PER_PAGE
+          })
+      );
     }
   }
-
   render() {
-    console.log("this.state", this.state, this.props);
+    console.log("this.state", this.props);
     return (
       <Layout>
         <Header>Flickr Photo Stream</Header>
         <Layout>
           <Content>
             <Search onSearch={this.changeHandler} />
-            {/* <div ref="myscroll">
-              {this.state.loading ? (
-                <p>loading ...</p>
-              ) : ( */}
             <PostPage
               posts={this.props.posts}
-              hasMore={this.state.hasMore}
               loadMore={this.loadMoreHandler}
             />
-            {/* )}
-            </div> */}
           </Content>
         </Layout>
         <Footer>Author: Diyana Dimitrova</Footer>
@@ -106,7 +101,8 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   posts: state.posts.posts,
-  pages: state.posts.pages
+  pages: state.posts.pages,
+  postsLoading: state.posts.postsLoading
 });
 
 const mapDispatchToProps = dispatch => ({
