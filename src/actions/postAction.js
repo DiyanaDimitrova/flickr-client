@@ -1,10 +1,7 @@
 import {
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_ERROR,
-  FETCH_POSTS_LOADING,
-  FETCH_TAG_POSTS_SUCCESS,
-  FETCH_TAG_POSTS_ERROR,
-  FETCH_TAG_POSTS_LOADING
+  FETCH_POSTS_LOADING
 } from "../types";
 import axios from "axios";
 import queryString from "query-string";
@@ -43,40 +40,6 @@ export const getPostsAction = payload => {
       })
       .catch(error => {
         dispatch(fetchPostsError());
-      });
-  };
-};
-
-export const fetchTagPostsLoading = () => {
-  return {
-    type: FETCH_TAG_POSTS_LOADING
-  };
-};
-
-export const fetchTagPostsSuccess = payload => {
-  return {
-    type: FETCH_TAG_POSTS_SUCCESS,
-    payload
-  };
-};
-
-export const fetchTagPostsError = payload => {
-  return {
-    type: FETCH_TAG_POSTS_ERROR,
-    payload
-  };
-};
-
-export const getTagPostsAction = payload => {
-  return dispatch => {
-    dispatch(fetchTagPostsLoading());
-    return axios
-      .get(`${apiUrl}?${queryString.stringify(payload)}`)
-      .then(response => {
-        dispatch(fetchTagPostsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchTagPostsError());
       });
   };
 };

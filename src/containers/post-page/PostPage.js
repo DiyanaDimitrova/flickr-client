@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Input } from "antd";
 import { connect } from "react-redux";
-import { getPostsAction, getTagPostsAction } from "../../actions/postAction";
+import { getPostsAction } from "../../actions/postAction";
 import { PostGrid } from "../../components/post-grid/PostGrid";
 import "./PostPage.scss";
 import { bindActionCreators } from "redux";
@@ -37,10 +37,11 @@ class PostPage extends Component {
     if (value) {
       this.setState(
         {
-          tags: value
+          tags: value,
+          page: 1
         },
         () => {
-          this.props.getTagPostsAction({
+          this.props.getPostsAction({
             tags: value,
             page: 1,
             limit: ITEMS_PER_PAGE
@@ -50,7 +51,8 @@ class PostPage extends Component {
     } else {
       this.setState(
         {
-          tags: null
+          tags: null,
+          page: 1
         },
         () => {
           this.props.getPostsAction({
@@ -72,7 +74,7 @@ class PostPage extends Component {
             posts: this.state.posts
           },
           () => {
-            this.props.getTagPostsAction({
+            this.props.getPostsAction({
               tags: this.state.tags,
               page: this.state.page,
               limit: ITEMS_PER_PAGE
@@ -131,8 +133,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getPostsAction: getPostsAction,
-      getTagPostsAction: getTagPostsAction
+      getPostsAction: getPostsAction
     },
     dispatch
   );
