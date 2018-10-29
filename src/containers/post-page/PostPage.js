@@ -102,11 +102,11 @@ class PostPage extends Component {
     console.log("this.props", this.props);
     return (
       <Layout>
-        <Header className="post-header">Flickr Photo Stream</Header>
-        <Layout className="post-layout">
-          <Content className="post-content">
+        <Header className="post-page-header">Flickr Photo Stream</Header>
+        <Layout className="post-page-layout">
+          <Content className="post-page-content">
             <Search
-              className="post-search"
+              className="post-page-search"
               placeholder="Enter Tag"
               size="large"
               onSearch={this.changeHandler}
@@ -118,7 +118,7 @@ class PostPage extends Component {
             />
           </Content>
         </Layout>
-        <Footer className="post-footer">Author: Diyana Dimitrova</Footer>
+        <Footer className="post-page-footer">Author: Diyana Dimitrova</Footer>
       </Layout>
     );
   }

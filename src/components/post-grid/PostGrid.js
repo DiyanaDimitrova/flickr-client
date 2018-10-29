@@ -12,7 +12,7 @@ export const PostGrid = ({ loadMore, pages, posts }) => {
           onChange={loadMore}
           offset={{
             bottom: 0,
-            top: pages * -1100,
+            top: pages * -1200,
             left: 0,
             right: 0
           }}
@@ -20,7 +20,7 @@ export const PostGrid = ({ loadMore, pages, posts }) => {
           scrollDelay={0}
           active={true}
         >
-          <div>
+          <div className="grid-container">
             {posts &&
               posts.map((item, index) => <PostItem key={index} {...item} />)}
           </div>

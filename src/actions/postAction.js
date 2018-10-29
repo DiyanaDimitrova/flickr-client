@@ -8,6 +8,9 @@ import {
 } from "../types";
 import axios from "axios";
 const apiUrl = `https://holiday-extras-server.herokuapp.com/posts`;
+axios.defaults.baseURL = `https://holiday-extras-server.herokuapp.com/posts`;
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 export const getPostsAction = payload => {
   console.log("payload", payload);
