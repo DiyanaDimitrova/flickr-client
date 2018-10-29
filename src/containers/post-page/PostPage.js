@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getPostsAction, getTagPostsAction } from "../../actions/postAction";
 import { PostGrid } from "../../components/post-grid/PostGrid";
 import "./PostPage.scss";
+import { bindActionCreators } from "redux";
 
 const { Header, Footer, Content } = Layout;
 const Search = Input.Search;
@@ -33,7 +34,6 @@ class PostPage extends Component {
   }
 
   changeHandler(value) {
-    console.log("value", value);
     if (value) {
       this.setState(
         {
@@ -64,8 +64,6 @@ class PostPage extends Component {
 
   loadMoreHandler() {
     if (this.state.page < this.props.pages) {
-      console.log("this.state.tags", this.state.tags);
-
       if (this.state.tags !== null) {
         this.setState(
           {
@@ -130,10 +128,14 @@ const mapStateToProps = state => ({
   postsLoading: state.posts.postsLoading
 });
 
-const mapDispatchToProps = dispatch => ({
-  getPostsAction: payload => dispatch(getPostsAction(payload)),
-  getTagPostsAction: payload => dispatch(getTagPostsAction(payload))
-});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getPostsAction: getPostsAction,
+      getTagPostsAction: getTagPostsAction
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

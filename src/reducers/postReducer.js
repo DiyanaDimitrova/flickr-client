@@ -10,7 +10,7 @@ import {
 export default function postReducer(state = [], action) {
   switch (action.type) {
     case FETCH_POSTS_SUCCESS:
-      const { posts, page, pages, limit, total } = action.data;
+      const { posts, page, pages, limit, total } = action.payload;
       const statePosts = page === 1 ? [] : state.items;
       const mergedPosts = [...statePosts, ...posts];
       return {
@@ -23,14 +23,9 @@ export default function postReducer(state = [], action) {
         error: false
       };
     case FETCH_POSTS_ERROR:
-      return { posts: [], error: true, postsLoading: false, ...state };
+      return { ...state, posts: [], postsLoading: false, error: true };
     case FETCH_POSTS_LOADING:
-      return {
-        items: state.items ? [...state.items] : [],
-        error: false,
-        postsLoading: true,
-        ...state
-      };
+      return { ...state, postsLoading: true, error: false };
     case FETCH_TAG_POSTS_SUCCESS:
       const {
         posts: tagPosts,
@@ -38,7 +33,7 @@ export default function postReducer(state = [], action) {
         pages: tagPages,
         limit: tagLimit,
         total: tagTotal
-      } = action.data;
+      } = action.payload;
       const stateTagPosts = tagPage === 1 ? [] : state.items;
       const mergedTagPosts = [...stateTagPosts, ...tagPosts];
       return {
@@ -51,14 +46,9 @@ export default function postReducer(state = [], action) {
         error: false
       };
     case FETCH_TAG_POSTS_ERROR:
-      return { posts: [], error: true, postsLoading: false, ...state };
+      return { ...state, posts: [], postsLoading: false, error: true };
     case FETCH_TAG_POSTS_LOADING:
-      return {
-        items: state.items ? [...state.items] : [],
-        error: false,
-        postsLoading: true,
-        ...state
-      };
+      return { ...state, postsLoading: true, error: false };
     default:
       return state;
   }
