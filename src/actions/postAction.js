@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import queryString from "query-string";
 
-const apiUrl = `https://holiday-extras-server.herokuapp.com/posts`;
+const apiUrl = `http://localhost:3001/posts`;
 
 export const fetchPostsLoading = () => {
   return {
@@ -32,9 +32,7 @@ export const getPostsAction = payload => {
   return dispatch => {
     dispatch(fetchPostsLoading());
     return axios
-      .get(`${apiUrl}?${queryString.stringify(payload)}`, {
-        crossdomain: true
-      })
+      .get(`${apiUrl}?${queryString.stringify(payload)}`)
       .then(response => {
         dispatch(fetchPostsSuccess(response.data));
       })

@@ -9,11 +9,14 @@ const initialState = {
   posts: { posts: [] }
 };
 const mockStore = configureStore();
-let wrapper;
-let store;
-beforeEach(() => {
-  store = mockStore(initialState);
-  wrapper = shallow(<PostPage store={store} />);
-});
 
-it("renders without crashing", () => {});
+describe("PostPage Component", () => {
+  let wrapper;
+  let store;
+  beforeEach(() => {
+    store = mockStore(initialState);
+    wrapper = shallow(<PostPage store={store} />);
+  });
+  it("render title", () => {});
+  it("render author", () => {});
+});

@@ -7,6 +7,9 @@ import { Col } from "antd";
 import { Card } from "antd";
 import "./PostItem.scss";
 
+/**
+ * PostItem
+ */
 export const PostItem = ({
   image,
   description,
@@ -14,28 +17,25 @@ export const PostItem = ({
   titleUrl,
   author,
   authorUrl,
-  tags,
-  url
-}) => {
-  return (
-    <Col
-      xs={{ span: 24 }}
-      sm={{ span: 12 }}
-      md={{ span: 12 }}
-      lg={{ span: 6 }}
-      xl={{ span: 6 }}
-    >
-      <Card className="post-card" hoverable>
-        <PostImage image={image} />
-        <PostTitle
-          title={title}
-          titleUrl={titleUrl}
-          author={author}
-          authorUrl={authorUrl}
-        />
-        <PostDescription description={description} />
-        <PostTags tags={tags} />
-      </Card>
-    </Col>
-  );
-};
+  tags
+}) => (
+  <Col
+    xs={{ span: 24 }}
+    sm={{ span: 12 }}
+    md={{ span: 12 }}
+    lg={{ span: 6 }}
+    xl={{ span: 6 }}
+  >
+    <Card className="post-card" hoverable>
+      <PostImage image={image} />
+      <PostTitle
+        title={title}
+        titleUrl={titleUrl}
+        author={author}
+        authorUrl={authorUrl}
+      />
+      <PostDescription description={description} />
+      <PostTags tags={tags} />
+    </Card>
+  </Col>
+);

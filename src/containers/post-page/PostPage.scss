@@ -1,27 +1,14 @@
 @import "../../settings.scss";
 
 .post-page {
-  &-header {
-    background-color: $blueColor;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 400;
-    color: white;
-  }
-  &-layout {
+  .layout {
     background-color: $lightBlueColor;
   }
-  &-content {
+  .content {
     background-color: $lightBlueColor;
     margin: 20px 40px;
   }
-  &-search {
+  .search {
     padding: 0 5px;
-  }
-  &-footer {
-    background-color: $blueColor;
-    font-weight: 500;
-    font-size: 15px;
-    color: white;
   }
 }
