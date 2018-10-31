@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import queryString from "query-string";
 
-const apiUrl = `http://localhost:3001/posts`;
+const apiUrl = `https://holiday-extras-server.herokuapp.com/posts`;
 
 export const fetchPostsLoading = () => {
   return {
