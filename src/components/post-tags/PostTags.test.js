@@ -7,13 +7,13 @@ describe("PostTags Component", () => {
   it("render tag label", () => {
     const wrapper = shallow(<PostTags />);
     const tagLabel = <div className="label">Tags:</div>;
-    expect(wrapper.contains(tagLabel)).toEqual(true);
+    expect(wrapper.contains(tagLabel)).toBeTruthy();
   });
   it("render tags", () => {
     const wrapper = shallow(
       <PostTags tags={["test", "tag", "flickr", "photo", "holiday"]} />
     );
     const tag = <Tag>{"test"}</Tag>;
-    expect(wrapper.contains(tag)).toEqual(true);
+    expect(wrapper.contains(tag)).toBeTruthy();
   });
 });

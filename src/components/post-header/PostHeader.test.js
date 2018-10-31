@@ -8,6 +8,6 @@ describe("PostHeader Component", () => {
     const { Header } = Layout;
     const wrapper = shallow(<PostHeader headerText="test" />);
     const header = <Header className="header">test</Header>;
-    expect(wrapper.contains(header)).toEqual(true);
+    expect(wrapper.contains(header)).toBeTruthy();
   });
 });

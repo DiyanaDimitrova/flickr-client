@@ -8,13 +8,13 @@ describe("PostTitle Component", () => {
       <PostTitle title="test" titleUrl="http://www.test.com" />
     );
     const title = <a href="http://www.test.com">test</a>;
-    expect(wrapper.contains(title)).toEqual(true);
+    expect(wrapper.contains(title)).toBeTruthy();
   });
   it("render author", () => {
     const wrapper = shallow(
       <PostTitle author="Diyana Dimitrova" authorUrl="http://www.diyana.com" />
     );
     const author = <a href="http://www.diyana.com">Diyana Dimitrova</a>;
-    expect(wrapper.contains(author)).toEqual(true);
+    expect(wrapper.contains(author)).toBeTruthy();
   });
 });

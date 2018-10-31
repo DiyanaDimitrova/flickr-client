@@ -8,6 +8,6 @@ describe("PostFooter Component", () => {
     const { Footer } = Layout;
     const wrapper = shallow(<PostFooter footerText="test" />);
     const footer = <Footer className="footer">test</Footer>;
-    expect(wrapper.contains(footer)).toEqual(true);
+    expect(wrapper.contains(footer)).toBeTruthy();
   });
 });

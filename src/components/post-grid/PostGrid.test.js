@@ -19,6 +19,6 @@ describe("PostGrid Component", () => {
     const [itemData] = data;
     const wrapper = shallow(<PostGrid posts={data} />);
     const item = <PostItem {...itemData} />;
-    expect(wrapper.contains(item)).toEqual(true);
+    expect(wrapper.contains(item)).toBeTruthy();
   });
 });

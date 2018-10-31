@@ -36,7 +36,7 @@ describe("PostItem Component", () => {
         authorUrl="http://www.diyana.com"
       />
     );
-    expect(wrapper.contains(title)).toEqual(true);
+    expect(wrapper.contains(title)).toBeTruthy();
   });
 
   it("render tags", () => {
@@ -46,6 +46,6 @@ describe("PostItem Component", () => {
     const tags = (
       <PostTags tags={["test", "tag", "flickr", "photo", "holiday"]} />
     );
-    expect(wrapper.contains(tags)).toEqual(true);
+    expect(wrapper.contains(tags)).toBeTruthy();
   });
 });

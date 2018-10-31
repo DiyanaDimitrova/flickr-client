@@ -7,6 +7,6 @@ describe("PostLoading Component", () => {
   it("render tag label", () => {
     const wrapper = shallow(<PostLoading />);
     const spinLoader = <Spin />;
-    expect(wrapper.contains(spinLoader)).toEqual(true);
+    expect(wrapper.contains(spinLoader)).toBeTruthy();
   });
 });

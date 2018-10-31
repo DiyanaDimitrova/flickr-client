@@ -12,7 +12,7 @@ describe("PostImage Component", () => {
         alt="http://www.test.com"
       />
     );
-    expect(wrapper.contains(image)).toEqual(true);
+    expect(wrapper.contains(image)).toBeTruthy();
   });
 
   it("render link image ", () => {
@@ -26,6 +26,6 @@ describe("PostImage Component", () => {
         />
       </a>
     );
-    expect(wrapper.contains(link)).toEqual(true);
+    expect(wrapper.contains(link)).toBeTruthy();
   });
 });
