@@ -17,7 +17,8 @@ export const PostItem = ({
   titleUrl,
   author,
   authorUrl,
-  tags
+  tags,
+  tagClick
 }) => (
   <Col
     xs={{ span: 24 }}
@@ -35,7 +36,7 @@ export const PostItem = ({
         authorUrl={authorUrl}
       />
       <PostDescription description={description} />
-      <PostTags tags={tags} />
+      <PostTags tags={tags} tagClick={tagClick} />
     </Card>
   </Col>
 );

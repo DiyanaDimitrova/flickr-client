@@ -30,7 +30,7 @@ class PostPage extends Component {
 
     this.state = {
       page: 0,
-      tags: null
+      tags: ""
     };
     this.bindMethods();
   }
@@ -82,7 +82,6 @@ class PostPage extends Component {
    * render
    */
   render() {
-    console.log("this.state", this.state);
     const { posts, pages, postsLoading } = this.props;
     return (
       <Layout className="post-page">
@@ -90,6 +89,7 @@ class PostPage extends Component {
         <Layout className="layout">
           <Content className="content">
             <Search
+              defaultValue={this.state.tags}
               className="search"
               placeholder={STATIC_TEXT.SEARCH}
               size="large"
@@ -99,6 +99,7 @@ class PostPage extends Component {
               posts={posts}
               pages={pages}
               loadMore={this.loadMoreHandler}
+              tagClick={this.changeHandler}
             />
             {postsLoading && <PostLoading />}
           </Content>

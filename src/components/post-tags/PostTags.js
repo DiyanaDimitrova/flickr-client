@@ -1,12 +1,25 @@
 import React from "react";
-import { Tag } from "antd";
+import { Button } from "antd";
 import "./PostTags.scss";
 
-export const PostTags = ({ tags = [] }) => {
+/**
+ * PostItem
+ */
+export const PostTags = ({ tags = [], tagClick }) => {
+  const clickHandler = (e, value) => {
+    e.preventDefault();
+    tagClick(value);
+  };
+
   return (
     <div className="post-tags-container">
       <div className="label">Tags:</div>
-      {tags && tags.map((tag, index) => <Tag key={index}>{tag}</Tag>)}
+      {tags &&
+        tags.map((tag, index) => (
+          <Button size="small" key={index} onClick={e => clickHandler(e, tag)}>
+            {tag}
+          </Button>
+        ))}
     </div>
   );
 };

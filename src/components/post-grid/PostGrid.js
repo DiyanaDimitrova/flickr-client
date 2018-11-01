@@ -7,7 +7,7 @@ import "./PostGrid.scss";
 /**
  * PostGrid
  */
-export const PostGrid = ({ loadMore, pages, posts }) => (
+export const PostGrid = ({ loadMore, pages, posts, tagClick }) => (
   <Row type="flex" justify="space-between">
     <VisibilitySensor
       onChange={loadMore}
@@ -23,7 +23,9 @@ export const PostGrid = ({ loadMore, pages, posts }) => (
     >
       <div className="grid-container">
         {posts &&
-          posts.map((item, index) => <PostItem key={index} {...item} />)}
+          posts.map((item, index) => (
+            <PostItem key={index} tagClick={tagClick} {...item} />
+          ))}
       </div>
     </VisibilitySensor>
   </Row>
