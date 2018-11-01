@@ -16,7 +16,12 @@ export const PostTags = ({ tags = [], tagClick }) => {
       <div className="label">Tags:</div>
       {tags &&
         tags.map((tag, index) => (
-          <Button size="small" key={index} onClick={e => clickHandler(e, tag)}>
+          <Button
+            className="tag"
+            size="small"
+            key={index}
+            onClick={e => clickHandler(e, tag)}
+          >
             {tag}
           </Button>
         ))}

@@ -24,7 +24,7 @@ export const PostItem = ({
     xs={{ span: 24 }}
     sm={{ span: 12 }}
     md={{ span: 12 }}
-    lg={{ span: 6 }}
+    lg={{ span: 8 }}
     xl={{ span: 6 }}
   >
     <Card className="post-card" hoverable>

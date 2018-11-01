@@ -1,4 +1,18 @@
+@import "../../settings.scss";
+
 .post-card {
-  height: 450px;
+  height: auto;
   margin: 5px;
+
+  @media only screen and (min-width: $screen-sm) {
+    height: 390px;
+  }
+
+  @media only screen and (min-width: $screen-md) {
+    height: 410px;
+  }
+
+  @media only screen and (min-width: $screen-lg) {
+    height: 430px;
+  }
 }
