@@ -89,10 +89,11 @@ class PostPage extends Component {
         <Layout className="layout">
           <Content className="content">
             <Search
-              defaultValue={this.state.tags}
+              value={this.state.tags}
               className="search"
               placeholder={STATIC_TEXT.SEARCH}
               size="large"
+              onChange={e => this.changeHandler(e.target.value)}
               onSearch={this.changeHandler}
             />
             <PostGrid
